@@ -8,6 +8,7 @@ use App\Http\Requests\Products\web\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,7 @@ class ProductController extends Controller
         return view("admin.products.edit",compact('product'));
     }
        
-    public function update(UpdateProductRequest $request,  $id)
+    public function update(ProductRequest $request,  $id)
     {   
         $product=Product::find($id);
          $data=$request->validated();
@@ -106,4 +107,19 @@ class ProductController extends Controller
           return view("admin.products.index",compact('products'));
 
     }
+
+
+    public function all()
+    {
+        
+        return view('admin.products.yajra');
+    }
+
+    public function getTable()
+    {
+        $query=Product::select('id','name','sku','price','qty','status');
+        return DataTables::of($query)->make(true);
+    }
+        
+    
 }

@@ -13,7 +13,15 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        Product::factory(50)->create();
+        $s = 1000;
+$total = 100000;
+
+for ($i = 0; $i < $total; $i += $s) {
+
+    $products = Product::factory($s)->make()->toArray();
+
+    Product::insert($products);
+}
+
     }
 }

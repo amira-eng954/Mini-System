@@ -18,7 +18,13 @@ class OrderController extends Controller
 {
     //
     public function store(Request $request)
-    {       
+    {  
+      $request->validate([
+    'products' => 'required|array|min:1',
+    'products.*.product_id' => 'required|exists:products,id',
+    'products.*.qun' => 'required|integer|min:1',
+]);
+     
          try{
             DB::beginTransaction();
 
@@ -27,6 +33,7 @@ class OrderController extends Controller
              ]);
              $total_price=0;
              //return "amira";
+             //$products= Product::whereIn('id',$request->products)->collect($request->products);
              foreach($request->products as $item)
              {
                  $product=Product::find($item['product_id']);

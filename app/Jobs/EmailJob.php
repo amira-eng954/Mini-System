@@ -28,13 +28,16 @@ protected $order;
     public function handle(): void
     {
         //
-        $admins=User::where('role','admin')->get();
-        foreach($admins as $admin)
-        {
-            // $admin->notify(new OrderNotification($this->order));
-               //return $admin;    
-        Mail::to($admin->email)->send(new EmailMail($this->order));
-        }
+        $emails=User::where('role','admin')->pluck('email')->toArray();
+         if(empty($emails)) 
+         {
+             throw new \Exception("not found emails");
+             
+            
+         }
+        Mail::to($emails)->send(new EmailMail($this->order));
+       
+        
 
         
 

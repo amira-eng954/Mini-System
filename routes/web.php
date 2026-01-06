@@ -28,4 +28,9 @@ Route::resource("product",ProductController::class);
 
 //filter product by name or sku
 Route::get("products/filter",[ProductController::class, 'filter'])->name('products.filter');
+
+Route::get('all',[ProductController::class, 'all'])->name('yajra.index');
+//yajra.table
+
+Route::get('yajra/table',[ProductController::class, 'getTable'])->name('yajra.table');
 require __DIR__.'/auth.php';

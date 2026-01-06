@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'price_total'=>$this->faker->randomFloat(1,200,500),
+            'total_price'=>$this->faker->randomFloat(1,3,500),
             'status' =>$this->faker->randomElement(['pending','complete'])
             
         ];

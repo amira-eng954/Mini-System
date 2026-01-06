@@ -52,7 +52,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request,  $id)
+    public function update(ProductRequest $request,  $id)
     {
         $product=Product::find($id);
         if(!$product)
